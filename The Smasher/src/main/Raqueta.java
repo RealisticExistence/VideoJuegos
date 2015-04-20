@@ -19,29 +19,15 @@ public class Raqueta extends Sprite{
 	public void onKeyPress(int keyCode) {
 		if(keyCode == KeyEvent.VK_LEFT && getPosition().x > 0){
 			Point2f pos = super.getPosition();
-			for(int i = 0; i < 20; i++){
-				pos.add(-1f, 0);
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			pos.add(-10f, 0);
 			
 			
 		}
 		else if(keyCode == KeyEvent.VK_RIGHT && getPosition().x < MainWindow.WIDTH - getWidth()){
 			Point2f pos = super.getPosition();
-			for(int i = 0; i < 20; i++){
-				pos.add(1f, 0);
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			
+				pos.add(10f, 0);
+			
 			
 		}
 		else if(keyCode == KeyEvent.VK_ESCAPE){
@@ -56,12 +42,18 @@ public class Raqueta extends Sprite{
 
 	@Override
 	public void act() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void onColision(Sprite arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onKeyReleased(int arg0) {
 		// TODO Auto-generated method stub
 		
 	}
