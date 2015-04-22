@@ -2,10 +2,10 @@ package main;
 
 import java.awt.event.KeyEvent;
 
-import es.techtalents.techlib.geom.Point2f;
-import es.techtalents.techlib.gui.MainWindow;
-import es.techtalents.techlib.image.ImageLoader;
-import es.techtalents.techlib.sprite.Sprite;
+import es.techtalents.ttgdl.geom.Point2f;
+import es.techtalents.ttgdl.gui.MainWindow;
+import es.techtalents.ttgdl.image.ImageLoader;
+import es.techtalents.ttgdl.sprite.Sprite;
 
 public class Raqueta extends Sprite{
 

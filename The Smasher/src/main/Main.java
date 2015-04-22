@@ -2,9 +2,9 @@ package main;
 
 import java.awt.Color;
 
-import es.techtalents.techlib.gui.MainWindow;
-import es.techtalents.techlib.gui.window.Window;
-import es.techtalents.techlib.image.ImageLoader;
+import es.techtalents.ttgdl.gui.MainWindow;
+import es.techtalents.ttgdl.gui.window.Window;
+import es.techtalents.ttgdl.image.ImageLoader;
 
 public class Main {
 	public static void main(String[] args){
