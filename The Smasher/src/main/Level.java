@@ -24,8 +24,7 @@ public class Level extends Window{
 		
 
 
-		Raqueta r = new Raqueta();
-		r.setVisible(true);
+		
 		
 		int numX = 10;
 		int numY = 4;
@@ -41,7 +40,8 @@ public class Level extends Window{
 				l.setPosition(x*l.getWidth(), y*l.getHeight());
 			}
 		}
-
+		Raqueta r = new Raqueta(array,this,mw);
+		r.setVisible(true);
 		Pelota p = new Pelota(r,array,this,mw);
 		p.setVisible(true);
 		p.setImage(pelota);

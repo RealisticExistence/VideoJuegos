@@ -2,6 +2,8 @@ package main;
 
 import java.awt.Image;
 
+import es.techtalents.ttgdl.geom.Point2f;
+import es.techtalents.ttgdl.geom.Vector2f;
 import es.techtalents.ttgdl.gui.MainWindow;
 import es.techtalents.ttgdl.gui.window.Window;
 import es.techtalents.ttgdl.image.ImageLoader;
@@ -18,8 +20,7 @@ public class Ladrillo extends Sprite{
 	Image ladrilloNv1 = ImageLoader.loadImage("Ladrillos/RaquetaNv1.png");
 	Image ladrilloNv2 = ImageLoader.loadImage("Ladrillos/RaquetaNv2.png");
 	Image ladrilloNv3 = ImageLoader.loadImage("Ladrillos/RaquetaNv3.png");
-
-
+	Vector2f speed = new Vector2f(0,1);
 	public Ladrillo(Window w){
 		this.w = w;
 		ladrilloNv1 = ImageLoader.loadImage("Ladrillos/RaquetaNv1.png").getScaledInstance(ladrilloNv1.getWidth(null) - 10, ladrilloNv1.getHeight(null), Image.SCALE_SMOOTH);
@@ -32,7 +33,9 @@ public class Ladrillo extends Sprite{
 
 	@Override
 	public void act() {
-		
+		if(vida <= 0){
+			getPosition().add(speed);
+		}
 
 	}
 	
@@ -55,7 +58,7 @@ public class Ladrillo extends Sprite{
 		else if(vida == 1){
 			setImage(ladrilloNv3);
 		}else if(vida == 0){
-			w.removeSprite(this);
+			
 		}
 		
 	}
