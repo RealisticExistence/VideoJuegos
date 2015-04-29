@@ -47,11 +47,11 @@ public class Raqueta extends Sprite{
 	public void act() {
 		if(derecha && getPosition().x < MainWindow.WIDTH - getWidth()) {
 			Point2f pos = getPosition();
-			pos.add(2, 0);
+			pos.add(5, 0);
 		}
 		if (izquierda &&  getPosition().x > 0) {
 			Point2f pos = getPosition();
-			pos.add(-2, 0);
+			pos.add(-5, 0);
 
 		}
 
