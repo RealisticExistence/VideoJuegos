@@ -7,6 +7,8 @@ public class Main {
 		MainWindow mw = new MainWindow();
 		Level w = new Level(mw);
 		mw.addWindow(w);
+		
+		
 	}
 
 	

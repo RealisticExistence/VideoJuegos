@@ -36,6 +36,17 @@ public class Ladrillo extends Sprite{
 		if(vida <= 0){
 			getPosition().add(speed);
 		}
+		if(vida == 3){
+			setImage(ladrilloNv1);
+		}
+		else if(vida == 2){
+			setImage(ladrilloNv2);
+		}
+		else if(vida == 1){
+			setImage(ladrilloNv3);
+		}else if(vida == 0){
+			
+		}
 
 	}
 	
@@ -49,17 +60,7 @@ public class Ladrillo extends Sprite{
 			vida--;
 		}
 			
-		if(vida == 3){
-			setImage(ladrilloNv1);
-		}
-		else if(vida == 2){
-			setImage(ladrilloNv2);
-		}
-		else if(vida == 1){
-			setImage(ladrilloNv3);
-		}else if(vida == 0){
-			
-		}
+		
 		
 	}
 

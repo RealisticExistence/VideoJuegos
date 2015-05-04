@@ -46,7 +46,7 @@ public class Level extends Window{
 		p.setVisible(true);
 		p.setImage(pelota);
 		p.setPosition(MainWindow.WIDTH/2, MainWindow.HEIGHT/2);
-		
+		r.p = p;
 		addSprite(p);
 		addSprite(r);
 		
