@@ -56,7 +56,8 @@ public class MainMenu extends Window{
 
 			@Override
 			public void clicked() {
-				
+				game.addWindow(new DificultyMenu(game));
+				game.showDificultyMenu();
 			}
 			
 		};
