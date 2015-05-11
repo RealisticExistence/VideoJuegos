@@ -23,9 +23,9 @@ public class Ladrillo extends Sprite{
 	Vector2f speed = new Vector2f(0,1);
 	public Ladrillo(Window w){
 		this.w = w;
-		ladrilloNv1 = ImageLoader.loadImage("Ladrillos/RaquetaNv1.png").getScaledInstance(ladrilloNv1.getWidth(null) - 10, ladrilloNv1.getHeight(null), Image.SCALE_SMOOTH);
-		ladrilloNv2 = ImageLoader.loadImage("Ladrillos/RaquetaNv2.png").getScaledInstance(ladrilloNv2.getWidth(null) - 10, ladrilloNv2.getHeight(null), Image.SCALE_SMOOTH);
-		ladrilloNv3 = ImageLoader.loadImage("Ladrillos/RaquetaNv3.png").getScaledInstance(ladrilloNv3.getWidth(null) - 10, ladrilloNv3.getHeight(null), Image.SCALE_SMOOTH);
+		ladrilloNv1 = ImageLoader.loadImage("Ladrillos/RaquetaNv1.png").getScaledInstance(MainWindow.WIDTH/10, MainWindow.HEIGHT/10, Image.SCALE_SMOOTH);
+		ladrilloNv2 = ImageLoader.loadImage("Ladrillos/RaquetaNv2.png").getScaledInstance(MainWindow.WIDTH/10, MainWindow.HEIGHT/10, Image.SCALE_SMOOTH);
+		ladrilloNv3 = ImageLoader.loadImage("Ladrillos/RaquetaNv3.png").getScaledInstance(MainWindow.WIDTH/10, MainWindow.HEIGHT/10, Image.SCALE_SMOOTH);
 		setImage(ladrilloNv1);
 
 	}
@@ -33,8 +33,11 @@ public class Ladrillo extends Sprite{
 
 	@Override
 	public void act() {
+			
+	
 		if(vida <= 0){
 			getPosition().add(speed);
+
 		}
 		if(vida == 3){
 			setImage(ladrilloNv1);
@@ -45,7 +48,6 @@ public class Ladrillo extends Sprite{
 		else if(vida == 1){
 			setImage(ladrilloNv3);
 		}else if(vida == 0){
-			
 		}
 
 	}
@@ -58,6 +60,9 @@ public class Ladrillo extends Sprite{
 	public void onColision(Sprite arg0) {
 		if(arg0 instanceof Pelota){
 			vida--;
+			if(arg0 instanceof Raqueta){
+				w.removeSprite(this);
+			}
 		}
 			
 		

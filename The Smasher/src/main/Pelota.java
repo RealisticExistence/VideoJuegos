@@ -35,7 +35,7 @@ public class Pelota extends Sprite{
 			Ladrillo l = array.get(i);
 			if(l.checkCollision(this) && !(l.isDead())){
 				this.onColision(l);
-				//break;
+				break;
 			}
 		}
 		if(r.checkCollision(this)){
@@ -48,10 +48,10 @@ public class Pelota extends Sprite{
 			speed.x *= -1;
 		}
 		if(getPosition().y > MainWindow.HEIGHT){
-			speed.y *= -1;
+			//speed.y *= -1;
 
-			//mw.removeWindow(w);
-			//mw.addWindow(new GameOverScreen());
+			mw.removeWindow(w);
+			mw.addWindow(new GameOverScreen());
 		}
 		if(getPosition().y < 0){
 			speed.y *= -1;

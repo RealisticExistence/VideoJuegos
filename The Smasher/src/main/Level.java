@@ -12,7 +12,7 @@ import es.techtalents.ttgdl.sprite.Sprite;
 public class Level extends Window{
 
 	ArrayList<Ladrillo> array = new ArrayList<Ladrillo>();
-	
+	private MainWindow mw;
 	public Level(MainWindow mw){
 		Image pelota = ImageLoader.loadImage("Images/Pelota.png");
 		Image img = ImageLoader.loadImage("Images/TheSmasherBackground.png").getScaledInstance(MainWindow.WIDTH, MainWindow.HEIGHT, Image.SCALE_SMOOTH);
@@ -21,7 +21,7 @@ public class Level extends Window{
 		setHeight(MainWindow.HEIGHT);
 		setVisible(true); //164 , 71
 		setBgColor(Color.BLACK);
-		
+		this.mw = mw;
 
 
 		
@@ -37,7 +37,7 @@ public class Level extends Window{
 				array.add(l);
 				l.setVisible(true);
 				addSprite(l);
-				l.setPosition(x*l.getWidth(), y*l.getHeight());
+				l.setPosition(x*l.getWidth(),y*l.getHeight());
 			}
 		}
 		Raqueta r = new Raqueta(array,this,mw);
@@ -57,7 +57,8 @@ public class Level extends Window{
 		super.removeSprite(s);
 		array.remove(s);
 		if(array.size() == 0){
-			System.exit(0);
+			mw.removeWindow(this);
+			mw.addWindow(new YouWinScreen());
 		}
 	}
 	

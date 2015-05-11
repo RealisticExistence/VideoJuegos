@@ -131,8 +131,14 @@ public class Raqueta extends Sprite{
 	}
 
 	private void hacerPelotaRapida() {
-		p.speed.x *= 1.5;
-		p.speed.y *= 1.5;
+		if(p.speed.x < 4){
+			p.speed.x *= 1.5;
+
+		}
+		if(p.speed.y < 4){
+			p.speed.y *= 1.5;
+
+		}
 		
 	}
 	private void hacerLenta() {
