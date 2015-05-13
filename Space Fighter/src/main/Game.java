@@ -13,8 +13,7 @@ public class Game extends MainWindow{
 
 
 	public Game(){ 
-		//mostrarMenu();
-		showLevel(1);
+		mostrarMenu();
 	}
 
 	public void removeWindows(Window w){
