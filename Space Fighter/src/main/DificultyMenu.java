@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 
 import es.techtalents.ttgdl.gui.window.Window;
 import es.techtalents.ttgdl.image.ImageLoader;
@@ -14,7 +15,19 @@ public class DificultyMenu extends Window{
 		setWidth(Game.WIDTH);
 		setBackgroundImage(fondo);
 		crearBotones();
+		
 	}
+	
+	@Override
+	public void onKeyPress(int keyCode) {
+		if(keyCode == KeyEvent.VK_ESCAPE){
+			game.removeWindows(this);
+			game.mostrarMenu();
+			
+		}
+		super.onKeyPress(keyCode);
+	}
+	
 	private void crearBotones() {
 		Image Easy = ImageLoader.loadImage("Botones/Facil.png");
 		Image EasyPressed = ImageLoader.loadImage("Botones/FacilPressed.png");

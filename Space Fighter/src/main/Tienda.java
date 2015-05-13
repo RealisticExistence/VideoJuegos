@@ -20,6 +20,7 @@ public class Tienda extends Window{
 	@Override
 	public void onKeyPress(int keyCode) {
 		if(keyCode == KeyEvent.VK_ESCAPE){
+			game.removeWindows(this);
 			game.mostrarMenu();
 		}
 		super.onKeyPress(keyCode);
