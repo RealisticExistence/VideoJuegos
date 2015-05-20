@@ -8,6 +8,7 @@ import es.techtalents.ttgdl.image.ImageLoader;
 
 public class DificultyMenu extends Window{
 	private Game game;
+	public boolean musicaActive;
 	public DificultyMenu(Game game){
 		this.game = game;
 		Image fondo = ImageLoader.loadImage("Images/FondoDificultad.jpg").getScaledInstance(Game.WIDTH, Game.HEIGHT, Image.SCALE_SMOOTH);
@@ -22,7 +23,7 @@ public class DificultyMenu extends Window{
 	public void onKeyPress(int keyCode) {
 		if(keyCode == KeyEvent.VK_ESCAPE){
 			game.removeWindows(this);
-			game.mostrarMenu();
+			game.mostrarMenu(musicaActive);
 			
 		}
 		super.onKeyPress(keyCode);
@@ -42,7 +43,7 @@ public class DificultyMenu extends Window{
 
 			@Override
 			public void clicked() {
-				game.showLevel(1);
+				game.showLevel(1, musicaActive);
 				
 			}
 			
@@ -52,7 +53,7 @@ public class DificultyMenu extends Window{
 
 			@Override
 			public void clicked() {
-				game.showLevel(2);
+				game.showLevel(2,musicaActive);
 				
 			}
 			
@@ -61,9 +62,10 @@ public class DificultyMenu extends Window{
 		
 		Boton dificil = new Boton(HardPressed,Hard){
 
+
 			@Override
 			public void clicked() {
-				game.showLevel(3);
+				game.showLevel(3,musicaActive);
 				
 				
 				

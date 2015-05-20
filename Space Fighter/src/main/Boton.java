@@ -27,7 +27,9 @@ public abstract class Boton extends Sprite{
 
 	public abstract void clicked(); 
 	
-
+	public void setPressedImage(Image img){
+		pressed = img;
+	}
 	@Override
 	public void onMouseEntered() {
 		setImage(pressed);		

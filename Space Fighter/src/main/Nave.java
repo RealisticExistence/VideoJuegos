@@ -18,9 +18,15 @@ public class Nave extends Sprite{
 	private boolean izquierda = false;
 	private boolean disparar = false;
 	private long tiempoanterior;
+	private int nvlnave;
+	private int ctrlMode;
+	public static int modoGiro;
 
 	public Nave(int wasdOflechas,int modoGiro,int nivelnave, Nivel nvl) {
 		this.nvl = nvl;
+		this.nvlnave = nivelnave;
+		this.ctrlMode = wasdOflechas;
+		this.modoGiro = modoGiro;
 		Image img = ImageLoader.loadImage("Images/NaveLvl1.png");
 		img = img.getScaledInstance((MainWindow.WIDTH/10), (MainWindow.HEIGHT/10), Image.SCALE_SMOOTH);
 		setPosition(0, MainWindow.HEIGHT/2-getHeight()/2);
@@ -74,23 +80,41 @@ public class Nave extends Sprite{
 		long tiempoactual = System.currentTimeMillis();
 		long tiempoTranscurrido = tiempoactual - tiempoanterior;
 		tiempoanterior = tiempoactual;
-		
+
 		float tiempo = tiempoTranscurrido/1000f;
 		Vector2f speed = new Vector2f(0, 0);
-		if(arriba){
-			speed.y = -750;
-		}
-		if(abajo){
-			speed.y = 750;
-		}
-		if(izquierda){
-			speed.x = -750;
-		}
-		if(derecha){
-			speed.x = 750;
+		if(modoGiro == 0){
+			if(arriba){
+				speed.y = -750;
+			}
+			if(abajo){
+				speed.y = 750;
+			}
+			if(izquierda){
+				speed.x = -750;
+			}
+			if(derecha){
+				speed.x = 750;
+
+
+			}
+		}else if(modoGiro == 1){
+
+			if(arriba){
+				speed.y = -750;
+			}
+			if(abajo){
+				speed.y = 750;
+			}
+			if(izquierda){
+				//TODO cambiar giro
+			}
+			if(derecha){
+				//TODO cambiar giro
+			}
 			
-			
 		}
+
 
 
 
@@ -113,8 +137,6 @@ public class Nave extends Sprite{
 
 	}
 	private void disparar() {
-		// TODO Auto-generated method stub
-
 	}
 
 
