@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import es.techtalents.ttgdl.geom.Point2f;
 import es.techtalents.ttgdl.geom.Vector2f;
@@ -21,12 +22,21 @@ public class Nave extends Sprite{
 	private int nvlnave;
 	private int ctrlMode;
 	public static int modoGiro;
+	private Armas arma;
+	private Armas arma1;
+	private boolean shooting;
 
-	public Nave(int wasdOflechas,int modoGiro,int nivelnave, Nivel nvl) {
+
+	public Nave(int wasdOflechas,int modoGiro,int nivelnave, Nivel nvl, List<Enemigo> enemigos) {
 		this.nvl = nvl;
 		this.nvlnave = nivelnave;
 		this.ctrlMode = wasdOflechas;
 		this.modoGiro = modoGiro;
+		arma = new ArmaLaser(nvl,enemigos);
+		arma1 = new ArmaLaser(nvl,enemigos);
+		arma.setTiempoderecarga(250);
+		arma1.setTiempoderecarga(250);
+		
 		Image img = ImageLoader.loadImage("Images/NaveLvl1.png");
 		img = img.getScaledInstance((MainWindow.WIDTH/10), (MainWindow.HEIGHT/10), Image.SCALE_SMOOTH);
 		setPosition(0, MainWindow.HEIGHT/2-getHeight()/2);
@@ -50,7 +60,7 @@ public class Nave extends Sprite{
 			izquierda = true;
 		}
 		if(keyCode == KeyEvent.VK_SPACE){
-			disparar();
+			shooting = true;
 		}
 		super.onKeyPress(keyCode);
 	}
@@ -71,12 +81,19 @@ public class Nave extends Sprite{
 		if(keyCode == KeyEvent.VK_LEFT){
 			izquierda = false;
 		}
+		if(keyCode == KeyEvent.VK_SPACE){
+			shooting = false;
+		}
 
 		super.onKeyReleased(keyCode);
 	}
 
 	@Override
 	public void act() {
+		if(shooting){
+			disparar();
+		}
+
 		long tiempoactual = System.currentTimeMillis();
 		long tiempoTranscurrido = tiempoactual - tiempoanterior;
 		tiempoanterior = tiempoactual;
@@ -112,7 +129,7 @@ public class Nave extends Sprite{
 			if(derecha){
 				//TODO cambiar giro
 			}
-			
+
 		}
 
 
@@ -137,6 +154,15 @@ public class Nave extends Sprite{
 
 	}
 	private void disparar() {
+		if(arma.recargado()){
+			arma.disparar(getPosition());
+		}
+		if(arma1.recargado()){
+			Point2f pos = new Point2f(getPosition().x, getPosition().y);	
+			pos.add(0, 85);
+			arma1.disparar(pos);
+
+		}
 	}
 
 
