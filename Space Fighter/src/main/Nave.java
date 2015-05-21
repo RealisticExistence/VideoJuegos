@@ -25,17 +25,21 @@ public class Nave extends Sprite{
 	private Armas arma;
 	private Armas arma1;
 	private boolean shooting;
+	private List<Enemigo> enemigos;
+	private Game g;
 
 
-	public Nave(int wasdOflechas,int modoGiro,int nivelnave, Nivel nvl, List<Enemigo> enemigos) {
+	public Nave(int wasdOflechas,int modoGiro,int nivelnave, Nivel nvl, List<Enemigo> enemigos, Game game) {
+		this.g = game;
 		this.nvl = nvl;
+		this.enemigos = enemigos;
 		this.nvlnave = nivelnave;
 		this.ctrlMode = wasdOflechas;
 		this.modoGiro = modoGiro;
-		arma = new ArmaLaser(nvl,enemigos);
-		arma1 = new ArmaLaser(nvl,enemigos);
-		arma.setTiempoderecarga(250);
-		arma1.setTiempoderecarga(250);
+		arma = new ArmaLaser(nvl,enemigos,true,this);
+		arma1 = new ArmaLaser(nvl,enemigos,true,this);
+		arma.setTiempoderecarga(500);
+		arma1.setTiempoderecarga(500);
 		
 		Image img = ImageLoader.loadImage("Images/NaveLvl1.png");
 		img = img.getScaledInstance((MainWindow.WIDTH/10), (MainWindow.HEIGHT/10), Image.SCALE_SMOOTH);
@@ -47,6 +51,7 @@ public class Nave extends Sprite{
 
 	@Override
 	public void onKeyPress(int keyCode) {
+		
 		if(keyCode == KeyEvent.VK_UP){
 			arriba = true;
 		}
@@ -90,6 +95,7 @@ public class Nave extends Sprite{
 
 	@Override
 	public void act() {
+		
 		if(shooting){
 			disparar();
 		}
@@ -155,14 +161,25 @@ public class Nave extends Sprite{
 	}
 	private void disparar() {
 		if(arma.recargado()){
-			arma.disparar(getPosition());
+			arma.disparar(getPosition(),1500);
 		}
 		if(arma1.recargado()){
 			Point2f pos = new Point2f(getPosition().x, getPosition().y);	
 			pos.add(0, 85);
-			arma1.disparar(pos);
+			arma1.disparar(pos,1500);
 
 		}
+	}
+	@Override
+	public void onColision(Sprite s) {
+		if(s instanceof Laser){
+			Laser l = (Laser) s;
+			if(l.b == false){
+				setVisible(false);
+				g.mostrarMenu(false);
+			}
+			
+		}		super.onColision(s);
 	}
 
 

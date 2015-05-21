@@ -5,7 +5,7 @@ import es.techtalents.ttgdl.geom.Point2f;
 public abstract class Armas {
 	private long tiempoanterior;
 	private float tiempoderecarga;
-	public abstract void disparar(Point2f pos);
+	public abstract void disparar(Point2f pos, float speed);
 	
 	public boolean recargado(){
 		long tiempoactual = System.currentTimeMillis();
