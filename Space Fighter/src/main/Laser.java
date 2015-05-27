@@ -10,6 +10,7 @@ import es.techtalents.ttgdl.sprite.Sprite;
 
 public class Laser extends Sprite{
 	private Window window;
+	static Image img = ImageLoader.loadImage("Botones/bala_aliada2.png").getScaledInstance(Game.WIDTH/50, Game.HEIGHT/50, Image.SCALE_SMOOTH);
 	private float speed;
 	private long tiempoanterior;
 	Sound s = new Sound("Musica/DisparoLaser.wav",1);
@@ -22,7 +23,7 @@ public class Laser extends Sprite{
 		this.e = e2;
 		this.b = b;
 		this.window = w;
-		Image img = ImageLoader.loadImage("Botones/bala_aliada2.png").getScaledInstance(Game.WIDTH/50, Game.HEIGHT/50, Image.SCALE_SMOOTH);
+		
 		setImage(img);
 		setVisible(true);
 		w.addSprite(this);
@@ -30,24 +31,13 @@ public class Laser extends Sprite{
 	}
 	@Override
 	public void act() {
-		if(checkCollision(n)){
-			n.onColision(this);
-		}
-		if(e.size() > 0){
-			for(int i = 0; i < e.size(); i++){
-				Enemigo e = this.e.get(i);
-				if(e.checkCollision(this)){
-					e.onColision(this);
-					this.onColision(e);
-				}
-			}
-		}
-		
-		
-	
+		checkColisions();
+
+
+
 		long tiempoactual = System.currentTimeMillis();
 		long tiempoTranscurrido = tiempoactual - tiempoanterior;
-		
+
 
 		if(tiempoanterior == 0){
 			tiempoanterior = tiempoactual;
@@ -84,6 +74,24 @@ public class Laser extends Sprite{
 
 
 
+	}
+	private void checkColisions() {
+		if(n != null){
+			if(checkCollision(n)){
+				n.onColision(this);
+			}
+		}
+		if(e.size() > 0){
+			for(int i = 0; i < e.size(); i++){
+				Enemigo e = this.e.get(i);
+				if(e.checkCollision(this)){
+					e.onColision(this);
+					this.onColision(e);
+					return;
+				}
+			}
+		}
+		
 	}
 	@Override
 	public void onColision(Sprite s) {

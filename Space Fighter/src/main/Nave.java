@@ -38,8 +38,8 @@ public class Nave extends Sprite{
 		this.modoGiro = modoGiro;
 		arma = new ArmaLaser(nvl,enemigos,true,this);
 		arma1 = new ArmaLaser(nvl,enemigos,true,this);
-		arma.setTiempoderecarga(500);
-		arma1.setTiempoderecarga(500);
+		arma.setTiempoderecarga(100);
+		arma1.setTiempoderecarga(100);
 		
 		Image img = ImageLoader.loadImage("Images/NaveLvl1.png");
 		img = img.getScaledInstance((MainWindow.WIDTH/10), (MainWindow.HEIGHT/10), Image.SCALE_SMOOTH);
@@ -105,6 +105,7 @@ public class Nave extends Sprite{
 		tiempoanterior = tiempoactual;
 
 		float tiempo = tiempoTranscurrido/1000f;
+		
 		Vector2f speed = new Vector2f(0, 0);
 		if(modoGiro == 0){
 			if(arriba){
@@ -175,8 +176,8 @@ public class Nave extends Sprite{
 		if(s instanceof Laser){
 			Laser l = (Laser) s;
 			if(l.b == false){
-				setVisible(false);
-				g.mostrarMenu(false);
+			//	setVisible(false);
+			//	g.mostrarMenu(false);
 			}
 			
 		}		super.onColision(s);

@@ -14,6 +14,9 @@ public class Enemigo extends Sprite{
 	private List<Enemigo> enemigos;
 	private boolean b;
 	private Nave n;
+
+	public int profundidad;
+
 	public Enemigo(Point2f pos, Nivel nvl, List<Enemigo> enemigos, boolean tieneArma, Nave n){
 		this.n = n;
 		this.b = tieneArma;
@@ -23,20 +26,31 @@ public class Enemigo extends Sprite{
 		setImage(img);
 		setVisible(true);
 		setPosition(pos);
+
 		if(b){
 			arma = new ArmaLaser(nvl,enemigos,false,n);
-			arma.setTiempoderecarga(1000);
+			arma.setTiempoderecarga(3000);
 		}
-		
-		
+
+
 	}
-	int numaleatorioy = (int) Math.round(Math.random()*(-5-5)+5);
-	int num = (int) Math.round(Math.random()*(0-5)+5);
-	int num1 = (int) Math.round(Math.random()*(-5-0)+0);
-	int numx = (int) Math.round(Math.random()*(2-5)+5);
+	int numaleatorioy = (int) Math.round(Math.random()*(-2-2)+2);
+	int num = (int) Math.round(Math.random()*(0-2)+2);
+	int num1 = (int) Math.round(Math.random()*(-2-0)+0);
+	int numx = (int) Math.round(Math.random()*(1-2)+2);
 	Vector2f speed = new Vector2f(-numx, numaleatorioy);
+	private long tiempoanterior;
 	@Override
 	public void act() {
+
+		long tiempoactual = System.currentTimeMillis();
+		long tiempoTranscurrido = tiempoactual - tiempoanterior;
+		tiempoanterior = tiempoactual;
+
+		float tiempo = tiempoTranscurrido/1000f;
+
+
+
 		disparar();
 		if(getPosition().y < 0){
 			speed.y = num;
@@ -44,30 +58,42 @@ public class Enemigo extends Sprite{
 		if(getPosition().y > Game.HEIGHT-getHeight()){
 			speed.y = num1;
 		}
+		if(getPosition().x < 0){
+			setPosition(Game.WIDTH, getPosition().y);
+		}
+
 		getPosition().add(speed);
 
-		
+
 	}
 	private void disparar() {
 		if(b){
 
 			if(arma.recargado()){
 				arma.disparar(getPosition(), -1500);
-			
+
+			}
 		}
-		}
-		
-		
+
+
 	}
 	@Override
 	public void onColision(Sprite s) {
 		if(s instanceof Laser){
 			Laser l = (Laser) s;
 			if(l.b == true){
+				Explosion e = new Explosion(getPosition(), nvl);
+				nvl.addSprite(e);
+
 				setVisible(false);
-				nvl.removeSpriteArray(this);
+				nvl.removeSprite(this);
+				enemigos.remove(this);
+				if(profundidad > 0){
+					nvl.siguienteRonda(new Point2f(getPosition()), profundidad -1);
+					nvl.siguienteRonda(new Point2f(getPosition()), profundidad -1);
+				}
 			}
-			
+
 		}
 		super.onColision(s);
 	}

@@ -10,7 +10,7 @@ public class Game extends MainWindow{
 
 	private Window menu = new MainMenu(this);
 	private Tienda tienda = new Tienda(this);
-	private Nivel level = new Nivel(this,1);
+	private Nivel level = new Nivel(this, 1);
 	private Controles control = new Controles(this);
 
 	private DificultyMenu menuD = new DificultyMenu(this);
